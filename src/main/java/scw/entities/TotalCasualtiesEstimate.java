@@ -1,4 +1,4 @@
-package main.java.swc.entities;
+package scw.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
