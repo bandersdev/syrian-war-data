@@ -1,9 +1,8 @@
 package scw.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -13,42 +12,38 @@ import java.util.Date;
  * @author Bryan Anders
  */
 @Entity
-public class TotalCasualtiesEstimate {
-
-    public Long getId() {
-        return id;
-    }
+@Table(name="total_fatalities")
+public class TotalFatalitiesEstimate {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name="id")
     private Long id;
 
-    // The name or abbreviation of the organization that published the report
-    private String sourceOrganization;
+    // The name and/or abbreviation of the organization that published the report
+    @Column(name="source")
+    private String source;
 
     // The url of the article or data source for the estimate
+    @Column(name="url")
     private String url;
 
     // The date the estimate was published
+    @Column(name="estimate_date")
     private Date dateReported;
 
     // The low and high end of an estimate range. If there is only
     // as single estimate value then both values should be
     // se to the number
+    @Column(name="estimate_low_end")
     private Integer lowEstimate;
+
+    @Column(name="estimate_high_end")
     private Integer highEstimate;
 
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getSourceOrganization() {
-        return sourceOrganization;
-    }
-
-    public void setSourceOrganization(String sourceOrganization) {
-        this.sourceOrganization = sourceOrganization;
     }
 
     public Date getDateReported() {
@@ -83,4 +78,15 @@ public class TotalCasualtiesEstimate {
         this.url = url;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
 }
