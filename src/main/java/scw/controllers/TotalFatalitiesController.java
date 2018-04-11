@@ -1,24 +1,26 @@
 package scw.controllers;
 
+import org.springframework.web.bind.annotation.RestController;
+import scw.beans.TotalFatalitiesEstimates;
 import scw.entities.TotalFatalitiesEstimate;
 import scw.repository.TotalFatalitiesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 
 /**
  * Defines endpoints for retrieving and serving TotalFatalitiesEstimate entities
  */
-@Controller
+@RestController
 @RequestMapping(path="/totalfatalities")
 public class TotalFatalitiesController {
 
     // implemented and instantiated at runtime
     @Autowired
-    private TotalFatalitiesRepository totalCasualtiesRepository;
+    private TotalFatalitiesRepository totalFatalitiesRepository;
 
     /**
      * Returns all total fatalities estimates
@@ -26,7 +28,12 @@ public class TotalFatalitiesController {
      * @return
      */
     @GetMapping(path="/allestimates")
-    public @ResponseBody Iterable<TotalFatalitiesEstimate> getAllEstimates() {
-        return totalCasualtiesRepository.findAll();
+    public TotalFatalitiesEstimates getAllEstimates() {
+        List<TotalFatalitiesEstimate> estimates = (List<TotalFatalitiesEstimate>) totalFatalitiesRepository.findAll();
+        TotalFatalitiesEstimates response = new TotalFatalitiesEstimates();
+        response.setCount(estimates.size());
+        response.setEstimates(estimates);
+
+        return response;
     }
 }

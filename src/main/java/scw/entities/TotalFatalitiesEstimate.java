@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**
  * A simple JDA entity which represents a single
- * estimate of total casualties in the Syrian Civil War.
+ * estimate of total fatalities in the Syrian Civil War.
  *
  * @author Bryan Anders
  */
@@ -33,8 +33,7 @@ public class TotalFatalitiesEstimate {
     private Date dateReported;
 
     // The low and high end of an estimate range. If there is only
-    // as single estimate value then both values should be
-    // se to the number
+    // as single estimate value then both values should be set   to the number
     @Column(name="estimate_low_end")
     private Integer lowEstimate;
 
